@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import { signUp } from './services/AutheticationRequests';
 
 class Login extends PureComponent{
 
@@ -21,8 +22,9 @@ class Login extends PureComponent{
     }
 
     handleSubmit = () => {
-        console.log(this.state.email);
-        console.log(this.state.password);
+        signUp(this.state.email, this.state.password, (userId => {
+            console.log(userId);
+        }));
     }
 
     render() {
