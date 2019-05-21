@@ -7,7 +7,6 @@ class Login extends PureComponent{
 
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
           email: '',
           password: ''
@@ -40,7 +39,7 @@ class Login extends PureComponent{
 
     updateStateAndGoToNextPage = (email, userId) => {
         this.props.onSignUp(email, userId);
-        this.props.history.push('/test');
+        this.props.history.push('/homepage');
     }
 
     render() {

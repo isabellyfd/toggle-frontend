@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Login from './Login';
-
-
-function Test2() {
-  return (<div> Test2 </div>);
-}
+import Homepage  from './Homepage'
 
 class App extends Component {
 
@@ -18,7 +14,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact={true} component={Login}></Route>
-          <Route path="/test" exact={true} component={Test2}></Route>
+          <Route path="/homepage" exact={true} component={Homepage}></Route>
         </Switch>
       </BrowserRouter>
     );
