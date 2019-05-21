@@ -5,6 +5,7 @@ class Login extends PureComponent{
 
     constructor(props) {
         super(props);
+        console.log('props Login', props);
         this.state = {
           email: '',
           password: ''
