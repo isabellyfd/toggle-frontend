@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
-import { Reducers } from '../reducer'
+import { createStore, applyMiddleware } from 'redux';
 
-export const Store = createStore(Reducers);
+const storeWithMiddleware = applyMiddleware()(createStore);
+
+export default storeWithMiddleware;

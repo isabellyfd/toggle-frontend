@@ -1,16 +1,13 @@
-const initialState = {
-    userId: '',
-    email: '',
-};
 
-export const authenticationReducer = (state = initialState, action) => {
+
+export const authenticationReducer = (state = {}, action) => {
     switch(action.type){
         case 'USER_SIGN_IN':
-            console.log(action);
+            const payload = action.payload;
             return { 
                 ...state,
-                userId: action.userId,
-                email: action.email
+                userId: payload.userId,
+                email: payload.email
             };
         default:
             return state;

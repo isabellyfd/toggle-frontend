@@ -1,15 +1,23 @@
 import React, {PureComponent} from 'react';
 import { signUp } from './services/AutheticationRequests';
+import {connect} from 'react-redux';
+import * as actions from './actions';
 
 class Login extends PureComponent{
 
     constructor(props) {
         super(props);
-        console.log('props Login', props);
+        console.log(props);
         this.state = {
           email: '',
           password: ''
         };
+    }
+
+    componentWillMount() {
+        if (this.props.email === undefined || this.props.email === '') {
+            this.props.history.push('/homepage');
+        }
     }
 
     handleEmailField = event => {
@@ -24,8 +32,15 @@ class Login extends PureComponent{
 
     handleSubmit = () => {
         signUp(this.state.email, this.state.password, (userId => {
-            console.log(userId);
+            if(userId !== undefined){
+                this.updateStateAndGoToNextPage(this.state.email, userId);
+            }
         }));
+    }
+
+    updateStateAndGoToNextPage = (email, userId) => {
+        this.props.onSignUp(email, userId);
+        this.props.history.push('/test');
     }
 
     render() {
@@ -45,4 +60,10 @@ class Login extends PureComponent{
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        email: state.email
+    }
+}
+
+export default connect(mapStateToProps, actions)(Login);

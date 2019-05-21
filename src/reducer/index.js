@@ -1,5 +1,9 @@
 import { authenticationReducer } from './AuthenticationReducer';
-// import { combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 
-console.log('autheticationReducerFunction', authenticationReducer);
-export const Reducers = authenticationReducer;
+
+const rootReducers = combineReducers({
+    authenticationReducer
+});
+
+export default rootReducers;

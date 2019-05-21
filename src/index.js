@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import { Provider } from 'react-redux';
-import { Store } from './store';
+import storeWithMiddleware from './store';
+import reducers from './reducer';
+import App from './App';
 
-
-console.log('Store', Store);
 ReactDOM.render(
-    <Provider store={Store}>
+    <Provider store={storeWithMiddleware(reducers)}>
         <App />
     </Provider>
 , document.getElementById('root'));
