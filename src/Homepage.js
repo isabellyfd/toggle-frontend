@@ -32,15 +32,16 @@ class Homepage extends Component {
     }
 
     handleNewApplicationClick = () => {
-        this.setState({ showNewApplicationForm: true })
+        this.setState({ showNewApplicationForm: true });
     }
 
     handleNewApplicationSetName = event => {
         const name = event.target.value;
-        this.setState({ newApplicationName: name })
+        this.setState({ newApplicationName: name });
     }
 
     handleNewApplicationSubmit = () => {
+        this.setState({showNewApplicationForm: false});
         createNewApplication(this.state.newApplicationName, this.props.userId, (wasCreationSuccessful => {
             if (wasCreationSuccessful){
                 this.fetchApplications()

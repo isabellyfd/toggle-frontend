@@ -58,7 +58,7 @@ class Login extends PureComponent {
                 {this.renderHeader()}
                 <Container>
                     <Row className="justify-content-md-center">
-                        <Col>
+                        <Col sm={6}>
                         <Jumbotron>
                             <h1>Hello, world!</h1>
                             <p>
@@ -67,7 +67,7 @@ class Login extends PureComponent {
                             </p>
                         </Jumbotron>
                         </Col>
-                        <Col md="auto">
+                        <Col md="auto" sm={6}>
                             {this.renderLoginCredentials()}
                         </Col>
                     </Row>
