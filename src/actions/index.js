@@ -6,6 +6,9 @@ export const onSignUp = (email, userId) => ({
     }
 });
 
-export const receiveHomePage = () => ({
-    type: 'RECEIVE_HOME_PAGE'
+export const receiveHomePage = (applications) => ({
+    type: 'RECEIVE_HOME_PAGE',
+    payload: {
+        applications
+    }
 })

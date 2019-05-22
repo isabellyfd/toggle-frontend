@@ -20,3 +20,15 @@ export function createNewApplication(name, userId, callback) {
             callback(undefined);
         });
 }
+
+export function fetchAllApplications(userId, callback) {
+    axios.get(`${baseURL}v1/toggle-service/my-apps/${userId}`)
+        .then(response => {
+            const applications = response.data;
+            console.log('response data from get applications request ', applications);
+            callback(applications);
+        })
+        .catch(_ => {
+            callback(undefined);
+        });
+}

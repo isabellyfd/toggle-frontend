@@ -2,8 +2,11 @@
 const applicationReducer = (state = {}, action) => {
     switch(action.type){
         case 'RECEIVE_HOME_PAGE':
-            console.log('home page state', state);
-            return state;
+            const payload = action.payload;
+            return {
+                ...state,
+                applications: payload.applications
+            };
         default:
             return state;
     }
