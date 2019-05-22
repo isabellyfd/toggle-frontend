@@ -6,9 +6,7 @@ import {connect} from 'react-redux';
 import { createNewApplication, fetchAllApplications } from './services/ApplicationRequests';
 import { receiveHomePage } from './actions';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import CentralisedContentWrapper from './CentralisedContentWrapper';
 
 class Homepage extends Component {
 
@@ -53,17 +51,14 @@ class Homepage extends Component {
     maybeRenderNewpplicationForm = () => {
         if (this.state.showNewApplicationForm) {
             return (
-                <Container>
-                    <Row>
-                        <Col sm={1}></Col>
-                        <Col sm={10}>
-                            <ApplicationForm 
+                <CentralisedContentWrapper 
+                    left={1}
+                    middle={10}
+                    right={1} >
+                    <ApplicationForm 
                                 handleNewApplicationName={this.handleNewApplicationSetName}
                                 handleNewApplicationSubmit={this.handleNewApplicationSubmit}/>
-                        </Col>
-                        <Col sm={1}></Col>
-                    </Row>
-                </Container>
+                </CentralisedContentWrapper>
             );
         }
     }
@@ -80,15 +75,12 @@ class Homepage extends Component {
                 </div>)
             });
             return (
-                <Container>
-                    <Row>
-                        <Col sm={1}></Col>
-                        <Col sm={10}>
-                            {itens}
-                        </Col>
-                        <Col sm={1}></Col>
-                    </Row>
-                </Container>
+                <CentralisedContentWrapper 
+                    left={1}
+                    middle={10}
+                    right={1} >
+                    {itens}
+                </CentralisedContentWrapper>
             );
         }
 

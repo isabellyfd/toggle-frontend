@@ -9,21 +9,18 @@ import Button from 'react-bootstrap/Button';
 const AddApplication = ({handleNewApplicationClick}) => {
     return( 
         <div>
-            <Container>
-                <Row>
-                    <Col sm={2}></Col>
-                    <Col sm={8}>
-                        <Button 
-                            onClick={handleNewApplicationClick}
-                            variant="secondary"
-                            size="lg" 
-                            block >
-                            New Application
-                        </Button>
-                    </Col>
-                    <Col sm={2}></Col>
-                </Row>
-            </Container>
+            <CentralisedContentWrapper 
+                left={2}
+                middle={8}
+                right={2}>
+                <Button 
+                    onClick={handleNewApplicationClick}
+                    variant="secondary"
+                    size="lg" 
+                    block >
+                    New Application
+                </Button>
+            </CentralisedContentWrapper>
         </div>
     );
 }
