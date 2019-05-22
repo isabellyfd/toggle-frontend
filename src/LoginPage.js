@@ -48,12 +48,18 @@ class Login extends PureComponent {
     render() {
         return (
             <div>
-                <LoginCredentials 
+                {this.renderLoginCredentials()}
+            </div>
+        );
+    }
+
+    renderLoginCredentials = () => {
+        return (
+            <LoginCredentials 
                     title="Log In"
                     handleSetEmail={this.handleEmailField}
                     handleSetPassword={this.handlePasswordField}
                     handleSubmit={this.handleSubmit} />
-            </div>
         );
     }
 }
