@@ -3,9 +3,8 @@ import { signUp } from './services/AutheticationRequests';
 import {connect} from 'react-redux';
 import * as actions from './actions';
 
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup'
-import Form from 'react-bootstrap/Form'
+import LoginCredentials from './LoginCredencials';
+
 class Login extends PureComponent {
 
     constructor(props) {
@@ -49,21 +48,11 @@ class Login extends PureComponent {
     render() {
         return (
             <div>
-                <h2>Log In</h2>
-                <InputGroup className="mb-3">
-                    <InputGroup.Prepend>
-                        <InputGroup.Text> Email </InputGroup.Text>
-                        <Form.Control aria-label="Large" aria-describedby="inputGroup-sizing-sm"></Form.Control>
-                    </InputGroup.Prepend>
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <InputGroup.Prepend>
-                        <InputGroup.Text> Password </InputGroup.Text>
-                        <Form.Control aria-label="Large" aria-describedby="inputGroup-sizing-sm"></Form.Control>
-                    </InputGroup.Prepend>
-                </InputGroup>
-                <Button variant="secondary"
-                    onClick={this.handleSubmit}>Log In</Button>
+                <LoginCredentials 
+                    title="Log In"
+                    handleSetEmail={this.handleEmailField}
+                    handleSetPassword={this.handlePasswordField}
+                    handleSubmit={this.handleSubmit} />
             </div>
         );
     }
