@@ -7,6 +7,7 @@ import { createNewApplication, fetchAllApplications } from './services/Applicati
 import { receiveHomePage } from './actions';
 
 import CentralisedContentWrapper from './CentralisedContentWrapper';
+import ApplicationTag from './ApplicationTab';
 
 class Homepage extends Component {
 
@@ -71,9 +72,9 @@ class Homepage extends Component {
         if (applications !== undefined) { 
 
             const itens = applications.map((application) => {
-                return (<div key={application.id}>
-                    {application.name}
-                </div>)
+                return (
+                    <ApplicationTag key={application.id} id={application.id} name={application.name}/>
+                );
             });
             return (
                 <CentralisedContentWrapper 
