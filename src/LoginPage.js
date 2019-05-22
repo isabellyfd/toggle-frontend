@@ -3,7 +3,10 @@ import { signUp } from './services/AutheticationRequests';
 import {connect} from 'react-redux';
 import * as actions from './actions';
 
-class Login extends PureComponent{
+import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup'
+import Form from 'react-bootstrap/Form'
+class Login extends PureComponent {
 
     constructor(props) {
         super(props);
@@ -14,7 +17,8 @@ class Login extends PureComponent{
     }
 
     componentWillMount() {
-        if (this.props.email === undefined || this.props.email === '') {
+        console.log(this.props.email);
+        if (this.props.email !== undefined && this.props.email !== '') {
             this.props.history.push('/homepage');
         }
     }
@@ -45,15 +49,21 @@ class Login extends PureComponent{
     render() {
         return (
             <div>
-                <h3>Sign In/Log In</h3>
-                <input type="text"
-                    placeholder="Email"
-                    onChange={this.handleEmailField}></input>
-                <input type="text"
-                    placeholder="Password"
-                    onChange={this.handlePasswordField}></input> 
-                <button type="button"
-                    onClick={this.handleSubmit}>Log In</button>
+                <h2>Log In</h2>
+                <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                        <InputGroup.Text> Email </InputGroup.Text>
+                        <Form.Control aria-label="Large" aria-describedby="inputGroup-sizing-sm"></Form.Control>
+                    </InputGroup.Prepend>
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                        <InputGroup.Text> Password </InputGroup.Text>
+                        <Form.Control aria-label="Large" aria-describedby="inputGroup-sizing-sm"></Form.Control>
+                    </InputGroup.Prepend>
+                </InputGroup>
+                <Button variant="secondary"
+                    onClick={this.handleSubmit}>Log In</Button>
             </div>
         );
     }

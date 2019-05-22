@@ -1,24 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Login from './Login';
+import LoginPage from './LoginPage';
 import Homepage  from './Homepage'
 
-class App extends Component {
-
-  constructor(props){
-    super(props);
-  }
-
-  render() {
+const App = (props) => {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact={true} component={Login}></Route>
+          <Route path="/" exact={true} component={LoginPage}></Route>
           <Route path="/homepage" exact={true} component={Homepage}></Route>
         </Switch>
       </BrowserRouter>
     );
-  }
 }
 
 export default App;
