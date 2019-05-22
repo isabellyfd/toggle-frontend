@@ -5,6 +5,13 @@ import * as actions from './actions';
 
 import LoginCredentials from './LoginCredencials';
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import Header from './Header';
+
 class Login extends PureComponent {
 
     constructor(props) {
@@ -47,14 +54,37 @@ class Login extends PureComponent {
 
     render() {
         return (
-            <div>
-                {this.renderLoginCredentials()}
+            <div> 
+                {this.renderHeader()}
+                <Container>
+                    <Row className="justify-content-md-center">
+                        <Col>
+                        <Jumbotron>
+                            <h1>Hello, world!</h1>
+                            <p>
+                                This is a simple hero unit, a simple jumbotron-style component for calling
+                                extra attention to featured content or information.
+                            </p>
+                        </Jumbotron>
+                        </Col>
+                        <Col md="auto">
+                            {this.renderLoginCredentials()}
+                        </Col>
+                    </Row>
+                </Container>
+                
             </div>
         );
+    }
+    renderHeader = () => {
+        return (
+            <Header/>
+        )
     }
 
     renderLoginCredentials = () => {
         return (
+
             <LoginCredentials 
                     title="Log In"
                     handleSetEmail={this.handleEmailField}
@@ -66,7 +96,7 @@ class Login extends PureComponent {
 
 const mapStateToProps = (state) => {
     return {
-        email: state.email
+        email: state.authenticationReducer.email
     }
 }
 

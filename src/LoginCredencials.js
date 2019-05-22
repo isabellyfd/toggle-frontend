@@ -17,7 +17,7 @@ const LoginCredentials = ({title, handleSubmit, handleSetEmail, handleSetPasswor
             <InputGroup className="mb-3">
                 <InputGroup.Prepend>
                     <InputGroup.Text> Password </InputGroup.Text>
-                    <Form.Control aria-label="Large" aria-describedby="inputGroup-sizing-sm" onChange={handleSetPassword}></Form.Control>
+                    <Form.Control aria-label="Large" aria-describedby="inputGroup-sizing-sm" onChange={handleSetPassword} type="password"></Form.Control>
                 </InputGroup.Prepend>
             </InputGroup>
             <Button variant="secondary"

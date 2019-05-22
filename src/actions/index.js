@@ -5,3 +5,7 @@ export const onSignUp = (email, userId) => ({
         userId
     }
 });
+
+export const receiveHomePage = () => ({
+    type: 'RECEIVE_HOME_PAGE'
+})
