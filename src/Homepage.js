@@ -5,14 +5,9 @@ import ApplicationForm from './ApplicationForm';
 import {connect} from 'react-redux';
 import { createNewApplication, fetchAllApplications } from './services/ApplicationRequests';
 import { receiveHomePage } from './actions';
-import { transformListIntoTupleList } from './utils/ListUtil';
 
 import CentralisedContentWrapper from './CentralisedContentWrapper';
-import ApplicationTag from './ApplicationTab';
-
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import GroupTab from './GroupTab';
 
 class Homepage extends Component {
 
@@ -79,29 +74,14 @@ class Homepage extends Component {
 
         console.log('applications', applications);
         if (applications !== undefined || applications === []) { 
-            const tupleList = transformListIntoTupleList(applications);
-
-            const tabs = tupleList.map((tuple) => {
-                return (
-                    <Row key={tuple[0].id}>
-                        <Col onClick={_ => this.handleApplicationTabClick(tuple[0])}>
-                            <ApplicationTag id={tuple[0].id} name={tuple[0].name}/>
-                        </Col>
-                        <Col onClick={_ => this.handleApplicationTabClick(tuple[1])}>
-                            {tuple[1] ? <ApplicationTag id={tuple[1].id} name={tuple[1].name}/> : null}
-                        </Col>
-                    </Row>
-                );
-            });
-
             return (
                 <CentralisedContentWrapper 
                     left={1}
                     middle={10}
                     right={1} >
-                    <Container>
-                        {tabs}
-                    </Container>
+                    <GroupTab 
+                        applications={applications}
+                        handleApplicationTabClick={this.handleApplicationTabClick} />
                 </CentralisedContentWrapper>
             );
         }
