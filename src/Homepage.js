@@ -5,9 +5,14 @@ import ApplicationForm from './ApplicationForm';
 import {connect} from 'react-redux';
 import { createNewApplication, fetchAllApplications } from './services/ApplicationRequests';
 import { receiveHomePage } from './actions';
+import { transformListIntoTupleList } from './utils/ListUtil';
 
 import CentralisedContentWrapper from './CentralisedContentWrapper';
 import ApplicationTag from './ApplicationTab';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class Homepage extends Component {
 
@@ -36,21 +41,7 @@ class Homepage extends Component {
         this.setState({ showNewApplicationForm: true });
     }
 
-    handleNewApplicationSetName = event => {
-        const name = event.target.value;
-        this.setState({ newApplicationName: name });
-    }
-
-    handleNewApplicationSubmit = () => {
-        this.setState({showNewApplicationForm: false});
-        createNewApplication(this.state.newApplicationName, this.props.userId, (wasCreationSuccessful => {
-            if (wasCreationSuccessful){
-                this.fetchApplications()
-            }
-        }));
-    }
-
-    maybeRenderNewpplicationForm = () => {
+    maybeRenderNewApplicationForm = () => {
         if (this.state.showNewApplicationForm) {
             return (
                 <CentralisedContentWrapper 
@@ -65,29 +56,58 @@ class Homepage extends Component {
         }
     }
 
+    handleNewApplicationSetName = event => {
+        const name = event.target.value;
+        this.setState({ newApplicationName: name });
+    }
+
+    handleNewApplicationSubmit = () => {
+        this.setState({showNewApplicationForm: false});
+        createNewApplication(this.state.newApplicationName, this.props.userId, (wasCreationSuccessful => {
+            if (wasCreationSuccessful){
+                this.fetchApplications()
+            }
+        }));
+    }
+
+    handleApplicationTabClick = (application) => {
+        console.log('application tab clicked with', application);
+    }
+
     renderSavedApplications = () => {
         const { applications } = this.props;
 
         console.log('applications', applications);
-        if (applications !== undefined) { 
+        if (applications !== undefined || applications === []) { 
+            const tupleList = transformListIntoTupleList(applications);
 
-            const itens = applications.map((application) => {
+            const tabs = tupleList.map((tuple) => {
                 return (
-                    <ApplicationTag key={application.id} id={application.id} name={application.name}/>
+                    <Row key={tuple[0].id}>
+                        <Col onClick={_ => this.handleApplicationTabClick(tuple[0])}>
+                            <ApplicationTag id={tuple[0].id} name={tuple[0].name}/>
+                        </Col>
+                        <Col onClick={_ => this.handleApplicationTabClick(tuple[1])}>
+                            {tuple[1] ? <ApplicationTag id={tuple[1].id} name={tuple[1].name}/> : null}
+                        </Col>
+                    </Row>
                 );
             });
+
             return (
                 <CentralisedContentWrapper 
                     left={1}
                     middle={10}
                     right={1} >
-                    {itens}
+                    <Container>
+                        {tabs}
+                    </Container>
                 </CentralisedContentWrapper>
             );
         }
 
         return (
-            <div>Sem applicação irmão</div>
+            <CentralisedContentWrapper>Sem applicação irmão</CentralisedContentWrapper>
         );
     }
 
@@ -96,7 +116,7 @@ class Homepage extends Component {
             <div>
                 <Header/>
                 <AddApplication handleNewApplicationClick={this.handleNewApplicationClick}/>
-                {this.maybeRenderNewpplicationForm()}
+                {this.maybeRenderNewApplicationForm()}
                 {this.renderSavedApplications()}
             </div>
         );
