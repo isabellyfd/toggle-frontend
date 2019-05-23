@@ -12,3 +12,11 @@ export const receiveHomePage = (applications) => ({
         applications
     }
 })
+
+export const onClickApplicationTab = (id, name) => ({
+    type: 'SELECTED_APPLICATION',
+    payload: {
+        id, 
+        name
+    }
+})

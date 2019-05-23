@@ -4,7 +4,7 @@ import AddApplication from './AddApplication';
 import ApplicationForm from './ApplicationForm';
 import {connect} from 'react-redux';
 import { createNewApplication, fetchAllApplications } from './services/ApplicationRequests';
-import { receiveHomePage } from './actions';
+import { receiveHomePage, onClickApplicationTab } from './actions';
 
 import CentralisedContentWrapper from './CentralisedContentWrapper';
 import GroupTab from './GroupTab';
@@ -13,7 +13,6 @@ class Homepage extends Component {
 
     constructor(props){
         super(props);
-        console.log('props in home page', props);
         this.state = {
             showNewApplicationForm: false,
             newApplicationName: '',
@@ -67,13 +66,14 @@ class Homepage extends Component {
 
     handleApplicationTabClick = (application) => {
         console.log('application tab clicked with', application);
+        this.props.onClickApplicationTab(application.id, application.name);
+        this.props.history.push('/toggles');
     }
 
     renderSavedApplications = () => {
         const { applications } = this.props;
 
-        console.log('applications', applications);
-        if (applications !== undefined || applications === []) { 
+        if (applications !== undefined) { 
             return (
                 <CentralisedContentWrapper 
                     left={1}
@@ -85,10 +85,6 @@ class Homepage extends Component {
                 </CentralisedContentWrapper>
             );
         }
-
-        return (
-            <CentralisedContentWrapper>Sem applicação irmão</CentralisedContentWrapper>
-        );
     }
 
    render() {
@@ -112,7 +108,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapActionsToProp = {
-    receiveHomePage
+    receiveHomePage,
+    onClickApplicationTab
 }
 
 export default connect(mapStateToProps, mapActionsToProp)(Homepage);
