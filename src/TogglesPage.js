@@ -19,6 +19,10 @@ class TogglesPage extends Component {
         }
     }
 
+    fecthToggles = () => {
+        
+    }
+
     handleAddNewToggle = () => {
         this.setState({showToggleForm: true})
     }
