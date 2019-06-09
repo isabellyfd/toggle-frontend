@@ -9,7 +9,6 @@ export function createNewApplication(name, userId, callback) {
         name, 
         userId
     }
-    console.log('sent body',body);
     axios.post(`${baseURL}v1/toggle-service/create-application/`, body)
         .then(response => {
             const data = response.data;

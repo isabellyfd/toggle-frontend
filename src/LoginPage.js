@@ -12,6 +12,35 @@ import Col from 'react-bootstrap/Col';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Header from './Header';
 
+import * as firebaseui from 'firebaseui';
+import * as firebase from 'firebase';
+
+const config = {
+    apiKey: "AIzaSyC1j_HZ0NNceyP4ixqHdbkra4vHhqtIArc",
+    authDomain: "toggle-app-ed92c.firebaseapp.com",
+    databaseURL: "https://toggle-app-ed92c.firebaseio.com",
+    projectId: "toggle-app-ed92c",
+    storageBucket: "toggle-app-ed92c.appspot.com",
+    messagingSenderId: "572630900278"
+};
+
+firebase.initializeApp(config);
+
+const firebaseuiConfig = {
+  signInOptions: [
+    firebase.auth.EmailAuthProvider.PROVIDER_ID
+  ],
+  signInSuccessUrl: 'http://localhost:3000/homepage',
+  callbacks: {
+    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+      console.log(authResult);
+      console.log(redirectUrl);
+      return true;
+    }
+  }
+};
+
+
 class Login extends PureComponent {
 
     constructor(props) {
@@ -27,6 +56,11 @@ class Login extends PureComponent {
         if (this.props.email !== undefined && this.props.email !== '') {
             this.props.history.push('/homepage');
         }
+    }
+
+    componentDidMount() {
+        const ui = new firebaseui.auth.AuthUI(firebase.auth())
+        ui.start('#firebaseui-auth-container', firebaseuiConfig)
     }
 
     handleEmailField = event => {
@@ -84,12 +118,14 @@ class Login extends PureComponent {
 
     renderLoginCredentials = () => {
         return (
-
-            <LoginCredentials 
+            <div>
+                <div id="firebaseui-auth-container"></div>
+                {/* <LoginCredentials 
                     title="Log In"
                     handleSetEmail={this.handleEmailField}
                     handleSetPassword={this.handlePasswordField}
-                    handleSubmit={this.handleSubmit} />
+                    handleSubmit={this.handleSubmit} /> */}
+            </div>
         );
     }
 }

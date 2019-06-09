@@ -3,7 +3,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import CentralisedContentWrapper from './CentralisedContentWrapper'
 
-const AddApplication = ({handleNewApplicationClick}) => {
+const AddTab = ({buttonTitle, handleClick}) => {
     return( 
         <div>
             <CentralisedContentWrapper 
@@ -11,15 +11,15 @@ const AddApplication = ({handleNewApplicationClick}) => {
                 middle={8}
                 right={2}>
                 <Button 
-                    onClick={handleNewApplicationClick}
+                    onClick={handleClick}
                     variant="secondary"
                     size="lg" 
                     block >
-                    New Application
+                    {buttonTitle}
                 </Button>
             </CentralisedContentWrapper>
         </div>
     );
 }
 
-export default AddApplication;
+export default AddTab;

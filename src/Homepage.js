@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import AddApplication from './AddApplication';
+import AddTab from './AddTab';
 import ApplicationForm from './ApplicationForm';
 import {connect} from 'react-redux';
 import { createNewApplication, fetchAllApplications } from './services/ApplicationRequests';
@@ -91,7 +91,9 @@ class Homepage extends Component {
         return (
             <div>
                 <Header/>
-                <AddApplication handleNewApplicationClick={this.handleNewApplicationClick}/>
+                <AddTab 
+                    buttonTitle="New Application" 
+                    handleClick={this.handleNewApplicationClick}/>
                 {this.maybeRenderNewApplicationForm()}
                 {this.renderSavedApplications()}
             </div>
