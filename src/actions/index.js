@@ -20,3 +20,10 @@ export const onClickApplicationTab = (id, name) => ({
         name
     }
 })
+
+export const receiveTogglePage = (toggles) => ({
+    type: 'RECEIVE_TOGGLE_PAGE',
+    payload: {
+        toggles
+    }
+})

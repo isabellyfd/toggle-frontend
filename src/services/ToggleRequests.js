@@ -17,3 +17,15 @@ export function createToggle(name, value, applicationId, callback) {
             callback(undefined);
         });
 }
+
+export function fetchAllToggles(applicationId, callback) {
+    axios.get(`${baseURL}v1/toggle-service/toggles/${applicationId}`)
+        .then(response => {
+            const toggles = response.data;
+            console.log('response data from get applications request ', toggles);
+            callback(toggles);
+        })
+        .catch(_ => {
+            callback(undefined);
+        });
+}

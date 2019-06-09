@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+
+import { receiveTogglePage } from './actions';
 import Header from './Header';
 import AddTab from './AddTab';
 
-import { createToggle } from './services/ToggleRequest';
+import { createToggle, fetchAllToggles } from './services/ToggleRequests';
 import CentralisedContentWrapper from './CentralisedContentWrapper';
 import ToggleForm from './ToggleForm';
 
@@ -19,8 +21,16 @@ class TogglesPage extends Component {
         }
     }
 
+    componentWillMount() {
+        this.fecthToggles();
+    }
+
     fecthToggles = () => {
-        
+        fetchAllToggles(this.props.applicationId, (toggles) => {
+            if (toggles !== undefined) {
+                this.props.receiveTogglePage(toggles);
+            }
+        });
     }
 
     handleAddNewToggle = () => {
@@ -28,21 +38,20 @@ class TogglesPage extends Component {
     }
 
     handleNewToggleName = event => {
-        console.log('handleNewToggleName', event)
         const name = event.target.value;
         this.setState({ newToggleName: name });
     }
 
     handleNewToggleValue = checked => {
-        console.log('handleNewToggleValue', checked)
         this.setState({checked})
     }
 
 
     handleNewToggleSubmit = () => {
-        console.log('handleNewToggleSubmit')
         createToggle(this.state.newToggleName, this.state.checked, this.props.applicationId, (response => {
-            console.log('create new Toggle', response);
+            if (response !== undefined) {
+                this.fecthToggles()
+            }
         }));
     }
 
@@ -78,10 +87,16 @@ class TogglesPage extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
         applicationId: state.applicationReducer.chosenApplicationId,
-        applicationName: state.applicationReducer.chosenApplicationName
+        applicationName: state.applicationReducer.chosenApplicationName,
+        toggles: state.toggleReducer.toggles
     }
 }
 
-export default connect(mapStateToProps)(TogglesPage);
+const mapActionsToProp = {
+    receiveTogglePage
+}
+
+export default connect(mapStateToProps, mapActionsToProp)(TogglesPage);
