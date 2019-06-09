@@ -9,8 +9,10 @@ import Col from 'react-bootstrap/Col';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Header from './Header';
 
-import * as firebaseui from 'firebaseui';
 import * as firebase from 'firebase';
+
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+
 
 const config = {
     apiKey: "AIzaSyC1j_HZ0NNceyP4ixqHdbkra4vHhqtIArc",
@@ -23,35 +25,36 @@ const config = {
 
 firebase.initializeApp(config);
 
-
-
-
 class Login extends PureComponent {
 
-    constructor(props) {
-        super(props);
+    firebaseuiConfig = {
+        signInOptions: [
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        callbacks: {
+            signInSuccessWithAuthResult: () => false
+        },
+    };
 
-        this.state = {
-          firebaseuiConfig: {
-            signInOptions: [
-              firebase.auth.EmailAuthProvider.PROVIDER_ID
-            ],
-            signInSuccessUrl: 'http://localhost:3000/homepage',
-            callbacks: {
-              signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-                const userId = authResult.user.uid;
-                const email = authResult.user.email;
-                props.onSignUp(email, userId);
-                return true;
-              }
-            }
-          }
-        };
-    }
+    /**
+   * @inheritDoc
+   */
+  componentDidMount() {
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
+      this.updateStateAndGoToNextPage(user.email, user.uid);
+    });
+  }
 
-    componentDidMount() {
-        const ui = new firebaseui.auth.AuthUI(firebase.auth())
-        ui.start('#firebaseui-auth-container', this.state.firebaseuiConfig)
+  /**
+   * @inheritDoc
+   */
+  componentWillUnmount() {
+    this.unregisterAuthObserver();
+  }
+
+    updateStateAndGoToNextPage = (email, userId) => {
+        this.props.onSignUp(email, userId);
+        this.props.history.push('/homepage');
     }
 
     render() {
@@ -86,7 +89,8 @@ class Login extends PureComponent {
 
     renderLoginCredentials = () => {
         return (
-            <div id="firebaseui-auth-container"></div>
+            <StyledFirebaseAuth uiConfig={this.firebaseuiConfig}
+            firebaseAuth={firebase.auth()}/>
         );
     }
 }
