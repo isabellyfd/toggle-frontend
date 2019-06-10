@@ -25,6 +25,25 @@ export function fetchAllToggles(applicationId, callback) {
             console.log('response data from get applications request ', toggles);
             callback(toggles);
         })
+        .catch(response => {
+            console.log(response);
+            console.log(callback);
+            callback(undefined);
+        });
+}
+
+export function updateToggleValue(id, name, value, applicationId, callback) {
+
+    const body = {
+        applicationId,
+        toggleId: id,
+        toggleName: name, 
+        toggleValue: value
+    }
+    axios.post(`${baseURL}v1/toggle-service/toggle/update`, body)
+        .then(response => {
+            callback(response);
+        })
         .catch(_ => {
             callback(undefined);
         });

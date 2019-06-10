@@ -65,7 +65,6 @@ class Homepage extends Component {
     }
 
     handleApplicationTabClick = (application) => {
-        console.log('application tab clicked with', application);
         this.props.onClickApplicationTab(application.id, application.name);
         this.props.history.push('/toggles');
     }
@@ -80,8 +79,8 @@ class Homepage extends Component {
                     middle={10}
                     right={1} >
                     <GroupTab 
-                        applications={applications}
-                        handleApplicationTabClick={this.handleApplicationTabClick} />
+                        list={applications}
+                        handleTabClick={this.handleApplicationTabClick} />
                 </CentralisedContentWrapper>
             );
         }

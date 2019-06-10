@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Switch from 'react-switch';
 
-const ToggleForm = ({checked, handleNewToggleName, handleNewToggleValue, handleNewToggleSubmit,}) => {
+const ToggleForm = ({checked, handleNewToggleName, handleNewToggleValue, handleNewToggleSubmit}) => {
     return (
         <Form>
             <Form.Group>

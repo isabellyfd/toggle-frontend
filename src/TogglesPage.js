@@ -5,9 +5,10 @@ import { receiveTogglePage } from './actions';
 import Header from './Header';
 import AddTab from './AddTab';
 
-import { createToggle, fetchAllToggles } from './services/ToggleRequests';
+import { createToggle, fetchAllToggles, updateToggleValue } from './services/ToggleRequests';
 import CentralisedContentWrapper from './CentralisedContentWrapper';
 import ToggleForm from './ToggleForm';
+import GroupTab from './GroupTab';
 
 class TogglesPage extends Component {
 
@@ -26,11 +27,12 @@ class TogglesPage extends Component {
     }
 
     fecthToggles = () => {
-        fetchAllToggles(this.props.applicationId, (toggles) => {
+        fetchAllToggles(this.props.applicationId, (toggles => {
             if (toggles !== undefined) {
+                console.log(toggles);
                 this.props.receiveTogglePage(toggles);
             }
-        });
+        }));
     }
 
     handleAddNewToggle = () => {
@@ -48,11 +50,20 @@ class TogglesPage extends Component {
 
 
     handleNewToggleSubmit = () => {
+        this.setState({showToggleForm: false})
         createToggle(this.state.newToggleName, this.state.checked, this.props.applicationId, (response => {
             if (response !== undefined) {
                 this.fecthToggles()
             }
         }));
+    }
+
+    handleToggleValueChange = (id, name, value) => {
+        updateToggleValue(id, name, value, this.props.applicationId, (response) => {
+            if (response !== undefined) {
+                fetchAllToggles()
+            }
+        })
     }
 
     maybeRenderAddNewToggleForm = () => {
@@ -72,6 +83,25 @@ class TogglesPage extends Component {
         }
     }
 
+    renderSavedApplications = () => {
+        const { toggles } = this.props;
+
+        if (toggles !== undefined) {
+            return (
+                <CentralisedContentWrapper 
+                    left={1}
+                    middle={10}
+                    right={1} >
+                    <GroupTab  
+                        list={toggles}
+                        handleTabClick={(event) => console.log(event)}
+                        handleSwitchChange={this.handleToggleValueChange}
+                    />
+                </CentralisedContentWrapper>
+            )
+        }
+    }
+
     render() {
         return (
             <div>
@@ -81,6 +111,7 @@ class TogglesPage extends Component {
                     handleClick={this.handleAddNewToggle}
                     />
                 {this.maybeRenderAddNewToggleForm()}
+                {this.renderSavedApplications()}
             </div>
         );
     }
