@@ -2,10 +2,11 @@ import React from 'react';
 
 import Button from 'react-bootstrap/Button';
 import CentralisedContentWrapper from './CentralisedContentWrapper'
+import './add-new.css'
 
 const AddTab = ({buttonTitle, handleClick}) => {
     return( 
-        <div>
+        <div className="create-button">
             <CentralisedContentWrapper 
                 left={2}
                 middle={8}
