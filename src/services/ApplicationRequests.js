@@ -12,7 +12,6 @@ export function createNewApplication(name, userId, callback) {
     axios.post(`${baseURL}v1/toggle-service/create-application/`, body)
         .then(response => {
             const data = response.data;
-            console.log('response data from create app request ', data);
             callback(wasRequestSuccessful(data));
         })
         .catch(_ => {
@@ -24,7 +23,6 @@ export function fetchAllApplications(userId, callback) {
     axios.get(`${baseURL}v1/toggle-service/my-apps/${userId}`)
         .then(response => {
             const applications = response.data;
-            console.log('response data from get applications request ', applications);
             callback(applications);
         })
         .catch(_ => {

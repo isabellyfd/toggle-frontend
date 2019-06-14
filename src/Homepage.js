@@ -101,7 +101,6 @@ class Homepage extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         userId: state.authenticationReducer.userId,
         email: state.authenticationReducer.email,

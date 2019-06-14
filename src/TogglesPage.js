@@ -26,10 +26,14 @@ class TogglesPage extends Component {
         this.fecthToggles();
     }
 
+    componentWillUnmount() {
+        const empty = [];
+        this.props.receiveTogglePage(empty);
+    }
+
     fecthToggles = () => {
         fetchAllToggles(this.props.applicationId, (toggles => {
             if (toggles !== undefined) {
-                console.log(toggles);
                 this.props.receiveTogglePage(toggles);
             }
         }));
@@ -118,7 +122,6 @@ class TogglesPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         applicationId: state.applicationReducer.chosenApplicationId,
         applicationName: state.applicationReducer.chosenApplicationName,
