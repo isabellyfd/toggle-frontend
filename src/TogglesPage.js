@@ -110,6 +110,16 @@ class TogglesPage extends Component {
         return (
             <div>
                 <Header toggleName={this.props.applicationName}/>
+                <CentralisedContentWrapper
+                    left={1}
+                    middle={10}
+                    right={1}>
+                    <div>
+                        <h3>App Configuration</h3>
+                        <p>User Id: {this.props.userId}</p>
+                        <p>Application Id: {this.props.applicationId}</p>
+                    </div>
+                </CentralisedContentWrapper>
                 <AddTab 
                     buttonTitle="New Toggle"
                     handleClick={this.handleAddNewToggle}
@@ -125,6 +135,7 @@ const mapStateToProps = (state) => {
     return {
         applicationId: state.applicationReducer.chosenApplicationId,
         applicationName: state.applicationReducer.chosenApplicationName,
+        userId: state.authenticationReducer.userId,
         toggles: state.toggleReducer.toggles
     }
 }

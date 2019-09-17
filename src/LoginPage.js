@@ -65,11 +65,11 @@ class Login extends PureComponent {
                     <Row className="justify-content-md-center">
                         <Col sm={6}>
                         <Jumbotron>
-                            <h1>Hello, world!</h1>
+                            <h1>Welcome to CocoaToggles!</h1>
                             <p>
-                                This is a simple hero unit, a simple jumbotron-style component for calling
-                                extra attention to featured content or information.
+                                CocoaToggles is a Swift based framework that aims to make the implementation of feature toggles within an app more straightforward.
                             </p>
+                            <p>Click <a>here</a> to see the documentation on GitHub.</p>
                         </Jumbotron>
                         </Col>
                         <Col md="auto" sm={6}>
