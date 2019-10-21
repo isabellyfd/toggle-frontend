@@ -67,9 +67,10 @@ class Login extends PureComponent {
                         <Jumbotron>
                             <h1>Welcome to CocoaToggles!</h1>
                             <p>
-                                CocoaToggles is a Swift based framework that aims to make the implementation of feature toggles within an app more straightforward.
+                                CocoaToggles is a Swift based framework that aims to make the implementation 
+                                of feature toggles within an app more straightforward.
                             </p>
-                            <p>Click <a>here</a> to see the documentation on GitHub.</p>
+                            <p>Click <a href="https://github.com/isabellyfd/CocoaToggles">here</a> to see the documentation on GitHub.</p>
                         </Jumbotron>
                         </Col>
                         <Col md="auto" sm={6}>
